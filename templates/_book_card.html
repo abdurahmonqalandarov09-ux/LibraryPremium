@@ -1,0 +1,11 @@
+<a class="book-card glass" href="{% url 'book_page' book.id %}">
+    {% if book.picture %}
+        <img src="{{ book.picture.url }}" alt="{{ book.title }}">
+    {% else %}
+        <div class="no-img">📖</div>
+    {% endif %}
+    <div class="book-info">
+        <h3>{{ book.title }}</h3>
+        <p class="muted">{{ book.price }} сомони</p>
+    </div>
+</a>

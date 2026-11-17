@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<form class="search glass" method="GET" action="{% url 'search' %}">
+    <input type="text" name="q" placeholder="Поиск по названию...">
+    <button class="btn btn-primary" type="submit">Найти</button>
+</form>
+
+<h2>Рекомендуем вам</h2>
+<div class="grid">
+    {% for book in books %}
+        {% include '_book_card.html' %}
+    {% empty %}
+        <p class="empty glass" style="grid-column:1/-1">Книг пока нет.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Управление книгами{% endblock %}
+{% block content %}
+<div class="top-bar">
+    <h1>Управление книгами</h1>
+    <a class="btn btn-primary" href="{% url 'create_book' %}">+ Добавить книгу</a>
+</div>
+
+<div class="table-wrap glass">
+    <table>
+        <tr>
+            <th>Фото</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Остаток</th>
+            <th>Действия</th>
+        </tr>
+        {% for book in books %}
+            <tr>
+                <td>{% if book.picture %}<img src="{{ book.picture.url }}" alt="">{% endif %}</td>
+                <td><a href="{% url 'book_page' book.id %}">{{ book.title }}</a></td>
+                <td>{{ book.price }}</td>
+                <td>{{ book.stock }}</td>
+                <td>
+                    <a class="btn btn-edit btn-sm" href="{% url 'update_book' book.id %}">Изменить</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_book' book.id %}">Удалить</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="5" class="empty">Книг пока нет.</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

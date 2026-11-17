@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Мои заказы{% endblock %}
+{% block content %}
+<h1>Мои заказы</h1>
+{% for order in orders %}
+    <div class="order glass">
+        <div class="order-head">
+            <h3>Заказ №{{ order.id }}</h3>
+            <span class="badge">{{ order.get_status_display }}</span>
+        </div>
+        <p class="muted">{{ order.created_at|date:"d.m.Y H:i" }}</p>
+        {% for book in order.books.all %}
+            <p>📖 <a href="{% url 'book_page' book.id %}">{{ book.title }}</a> — {{ book.price }} сомони</p>
+        {% endfor %}
+    </div>
+{% empty %}
+    <p class="empty glass">У вас пока нет заказов.</p>
+{% endfor %}
+{% endblock %}

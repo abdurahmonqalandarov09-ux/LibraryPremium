@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+<div class="book-page glass">
+    {% if book.picture %}
+        <img src="{{ book.picture.url }}" alt="{{ book.title }}">
+    {% else %}
+        <div class="no-img">📖</div>
+    {% endif %}
+
+    <div class="book-details">
+        <h1>{{ book.title }}</h1>
+
+        <p>
+            {% for a in book.authors.all %}<span class="badge">✍️ {{ a.name }}</span>{% endfor %}
+            {% for c in book.categories.all %}<span class="badge">{{ c.category_name }}</span>{% endfor %}
+        </p>
+        <p class="muted">Издательство: {{ book.publisher.publisher_name }}</p>
+        <p>{{ book.caption }}</p>
+
+        <p class="price">{{ book.price }} сомони</p>
+
+        {% if book.stock > 0 %}
+            <span class="badge badge-green">В наличии: {{ book.stock }}</span>
+        {% else %}
+            <span class="badge badge-red">Нет в наличии</span>
+        {% endif %}
+
+        <div class="actions">
+            {% if book.stock > 0 %}
+                <form method="POST" action="{% url 'order_book' book.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">Заказать</button>
+                </form>
+            {% endif %}
+            {% if user.is_staff %}
+                <a class="btn btn-edit" href="{% url 'update_book' book.id %}">Изменить</a>
+                <a class="btn btn-danger" href="{% url 'delete_book' book.id %}">Удалить</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if book.content %}
+    <h2>Читать онлайн</h2>
+    <div class="reader glass">
+        {{ book.content|linebreaks }}
+    </div>
+{% endif %}
+
+{% if book.video %}
+    <h2>Видео о книге</h2>
+    <video controls>
+        <source src="{{ book.video.url }}" type="video/mp4">
+    </video>
+{% endif %}
+{% endblock %}
