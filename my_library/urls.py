@@ -15,5 +15,17 @@ urlpatterns = [
     path('update_book/<int:id>/', update_book, name='update_book'),
     path('delete_book/<int:id>/', delete_book, name='delete_book'),
     path('order_book/<int:id>/', order_book, name='order_book'),
-    path('my_orders/', my_orders, name='my_orders')
-] 
+    path('my_orders/', my_orders, name='my_orders'),
+    path('create_author/', create_author, name='create_author'),
+    path('add_category/', add_category, name='add_category'),
+    path('show_authors/', show_author, name='show_authors'),
+    path('show_categories', show_categories, name='show_categories'),
+    path('update_author/<int:id>/', update_author, name='update_author'),
+    path('update_category<int:id>/', update_category, name='update_category'),
+    path('delete_author/<int:id>/', delete_author, name='delete_author'),
+    path('delete_category/<int:id>/', delete_category, name='delete_category'),
+    path('create_publisher/', create_publisher, name='create_publisher'),
+    path('show_publishers/', show_publisher, name='show_publishers'),
+    path('update_publisher/<int:id>/', update_publisher, name='update_publisher'),
+    path('delete_publisher/<int:id>/', delete_publisher, name='delete_publisher'),
+    ] 

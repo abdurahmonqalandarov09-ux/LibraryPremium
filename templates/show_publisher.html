@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Издательства{% endblock %}
+{% block content %}
+<div class="top-bar">
+    <h1>Издательства</h1>
+    <a class="btn btn-primary" href="{% url 'create_publisher' %}">+ Добавить издательство</a>
+</div>
+
+<div class="table-wrap glass">
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Название</th>
+            <th>Действия</th>
+        </tr>
+        {% for publisher in publishers %}
+            <tr>
+                <td>{{ publisher.id }}</td>
+                <td>{{ publisher.publisher_name }}</td>
+                <td>
+                    <a class="btn btn-edit btn-sm" href="{% url 'update_publisher' publisher.id %}">Изменить</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_publisher' publisher.id %}">Удалить</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="3" class="empty">Издательств пока нет.</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

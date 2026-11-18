@@ -16,8 +16,11 @@
                 <a href="{% url 'my_orders' %}">Мои заказы</a>
                 <a href="{% url 'profile' %}">Профиль</a>
                 {% if user.is_staff %}
-                    <a href="{% url 'show_books' %}">Управление</a>
+                    <a href="{% url 'show_books' %}">Книги</a>
+                    <a href="{% url 'show_categories' %}">Категории</a>
+                    <a href="{% url 'show_authors' %}">Авторы</a>
                     <a href="{% url 'create_book' %}">+ Книга</a>
+                    <a href="{% url 'show_publishers' %}">Издательства</a>
                 {% endif %}
                 <a href="{% url 'logout' %}">Выйти</a>
             {% else %}

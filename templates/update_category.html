@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Изменить категорию{% endblock %}
+{% block content %}
+<form class="form glass" method="POST">
+    {% csrf_token %}
+    <h1>Изменить категорию</h1>
+    <input type="text" name="category_name" value="{{ category.category_name }}" required>
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+    <a class="btn" href="{% url 'show_categories' %}" style="text-align:center">Отмена</a>
+</form>
+{% endblock %}

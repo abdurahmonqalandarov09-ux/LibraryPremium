@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Авторы{% endblock %}
+{% block content %}
+<div class="top-bar">
+    <h1>Авторы</h1>
+    <a class="btn btn-primary" href="{% url 'create_author' %}">+ Добавить автора</a>
+</div>
+
+<div class="table-wrap glass">
+    <table>
+        <tr>
+            <th>Имя</th>
+            <th>Возраст</th>
+            <th>Страна</th>
+            <th>Действия</th>
+        </tr>
+        {% for author in authors %}
+            <tr>
+                <td>{{ author.name }}</td>
+                <td>{{ author.age }}</td>
+                <td>{{ author.country }}</td>
+                <td>
+                    <a class="btn btn-edit btn-sm" href="{% url 'update_author' author.id %}">Изменить</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_author' author.id %}">Удалить</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="4" class="empty">Авторов пока нет.</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

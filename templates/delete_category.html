@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Удалить категорию{% endblock %}
+{% block content %}
+<div class="auth glass">
+    <h1>Удалить категорию?</h1>
+    <p>Вы точно хотите удалить «{{ category.category_name }}»?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Да, удалить</button>
+        <a class="btn" href="{% url 'show_categories' %}">Отмена</a>
+    </form>
+</div>
+{% endblock %}

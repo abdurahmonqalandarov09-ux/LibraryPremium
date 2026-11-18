@@ -6,6 +6,7 @@
     {% endif %}
     <div class="book-info">
         <h3>{{ book.title }}</h3>
+        <p class="muted">{% for a in book.authors.all %}{{ a.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
         <p class="muted">{{ book.price }} сомони</p>
     </div>
 </a>

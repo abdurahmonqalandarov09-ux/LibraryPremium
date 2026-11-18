@@ -167,4 +167,139 @@ def delete_book(request, id):
 
 
 
+@user_passes_test(is_admin, login_url='login')
+def add_category(request):
+    if request.method == "POST":
+        data = request.POST
+        Category.objects.create(
+            category_name = data['category_name']
+        )
+        return redirect('show_categories')
+    return render(request, 'add_category.html')
 
+
+
+@user_passes_test(is_admin, login_url='login')
+def show_categories(request):
+    if request.method == "GET":
+        category = Category.objects.all()
+        return render(request, 'show_category.html', {'category': category})
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def update_category(request, id):
+    category = get_object_or_404(Category, id=id)
+    if request.method == "POST":
+        category.category_name = request.POST['category_name']
+        category.save()
+        return redirect('show_categories')
+    return render(request, 'update_category.html', {'category': category})
+
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def delete_category(request, id):
+    category = get_object_or_404(Category, id=id)
+    if request.method == "POST":
+        category.delete()
+        return redirect('show_categories')
+    return render(request, 'delete_category.html', {'category': category})
+
+
+
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def create_author(request):
+    if request.method == "POST":
+        data = request.POST
+        Authors.objects.create(
+            name = data['name'],
+            age = data['age'],
+            country = data['country']
+        )
+        return redirect('show_authors')
+    return render(request, 'create_author.html')
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def show_author(request):
+    if request.method == "GET":
+        author = Authors.objects.all()
+        return render(request, 'show_author.html', {'author': author})
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def update_author(request, id):
+    author = get_object_or_404(Authors, id=id)
+    if request.method == "POST":
+        data = request.POST
+        author.name = data['name']
+        author.age = data['age']
+        author.country = data['country']
+        author.save()
+        return redirect('show_authors')
+    return render(request, 'update_author.html', {'author': author})
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def delete_author(request, id):
+    author = get_object_or_404(Authors, id=id)
+    if request.method == "POST":
+        author.delete()
+        return redirect('show_authors')
+    return render(request, 'delete_author.html', {'author': author})
+
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def create_publisher(request):
+    if request.method == "POST":
+        data = request.POST
+        Publishers.objects.create(
+            publisher_name = data['publisher_name']
+        )
+        return redirect('show_publishers')
+    return render(request, 'create_publisher.html')
+
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def show_publisher(request):
+    if request.method == "GET":
+        publisher = Publishers.objects.all()
+        return render(request, 'show_publisher.html', {'publisher': publisher})
+
+
+
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def update_publisher(request, id):
+    publisher = get_object_or_404(Publishers, id=id)
+    if request.method == "POST":
+        data = request.POST
+        publisher.publisher_name = data['publisher_name']
+        publisher.save()
+        return redirect('show_publishers')
+    return render(request, 'update_publisher.html', {'publisher': publisher})
+
+
+
+
+@user_passes_test(is_admin, login_url='login')
+def delete_publisher(request, id):
+    publisher = get_object_or_404(Publishers, id=id)
+    if request.method == "POST":
+        publisher.delete()
+        return redirect('show_publishers')
+    return render(request, 'delete_publisher.html', {'publisher': publisher})

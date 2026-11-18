@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Удалить издательство{% endblock %}
+{% block content %}
+<div class="auth glass">
+    <h1>Удалить издательство?</h1>
+    <p>Вы точно хотите удалить «{{ publisher.publisher_name }}»?</p>
+    <p class="muted">Все книги этого издательства тоже будут удалены.</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Да, удалить</button>
+        <a class="btn" href="{% url 'show_publishers' %}">Отмена</a>
+    </form>
+</div>
+{% endblock %}

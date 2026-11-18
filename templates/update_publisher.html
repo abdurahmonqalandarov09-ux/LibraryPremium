@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Изменить издательство{% endblock %}
+{% block content %}
+<form class="form glass" method="POST">
+    {% csrf_token %}
+    <h1>Изменить издательство</h1>
+    <input type="text" name="publisher_name" value="{{ publisher.publisher_name }}" required>
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+    <a class="btn" href="{% url 'show_publishers' %}" style="text-align:center">Отмена</a>
+</form>
+{% endblock %}
